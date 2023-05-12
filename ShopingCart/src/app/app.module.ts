@@ -51,6 +51,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { DiscountPipe } from './pipes/discount.pipe';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     CartComponent,
     ProductsComponent,
+    DiscountPipe,
   ],
   imports: [
     BrowserModule,
@@ -102,7 +104,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [DiscountPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

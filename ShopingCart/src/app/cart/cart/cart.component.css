@@ -1,0 +1,24 @@
+.card {
+  position: relative;
+  height: 60vh;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.price-details .title {
+  text-align: left;
+}
+.price-details .value {
+  text-align: right;
+}
+.price-details .row {
+  margin: 10px 0;
+}
+.table {
+  width: 500px;
+  overflow-x: scroll;
+}

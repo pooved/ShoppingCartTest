@@ -1,0 +1,95 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "Mixer Grinder",
+      "category": {
+        "name": "Home Appliances",
+        "deliverCharges": 150
+      },
+      "image": "https://m.media-amazon.com/images/I/71M8AEXHJXL._SL1500_.jpg",
+      "cost": 2000,
+      "discount": {
+        "normalDiscount": 4,
+        "additionalIndepenceDiscount": 3
+      }
+    },
+    {
+      "id": 2,
+      "name": "Microwave",
+      "category": {
+        "name": "Home Appliances",
+        "deliverCharges": 150
+      },
+      "image": "https://m.media-amazon.com/images/I/41rIl0KttML.jpg",
+      "cost": 5000,
+      "discount": {
+        "normalDiscount": 12,
+        "additionalIndepenceDiscount": 2
+      }
+    },
+    {
+      "id": 3,
+      "name": "Keyboard",
+      "category": {
+        "name": "Computers",
+        "deliverCharges": 0
+      },
+      "image": "https://m.media-amazon.com/images/I/71keMYO9t4L._SL1500_.jpg",
+      "cost": 500,
+      "discount": {
+        "normalDiscount": 0,
+        "additionalIndepenceDiscount": 5
+      }
+    },
+    {
+      "id": 4,
+      "name": "SD Card",
+      "category": {
+        "name": "Mobile",
+        "deliverCharges": 50
+      },
+      "image": "https://m.media-amazon.com/images/I/71ymHqvbfUL._SL1500_.jpg",
+      "cost": 1200,
+      "discount": {
+        "normalDiscount": 6,
+        "additionalIndepenceDiscount": 8
+      }
+    },
+    {
+      "id": 5,
+      "name": "Recliner",
+      "category": {
+        "name": "Furniture",
+        "deliverCharges": 500
+      },
+      "image": "https://m.media-amazon.com/images/I/91iq-oxI8hL._SL1500_.jpg",
+      "cost": 40000,
+      "discount": {
+        "normalDiscount": 20,
+        "additionalIndepenceDiscount": 25
+      }
+    },
+    {
+      "id": 6,
+      "name": "Dining table",
+      "category": {
+        "name": "Furniture",
+        "deliverCharges": 500
+      },
+      "image": "https://m.media-amazon.com/images/I/51SzK2qldDL.jpg",
+      "cost": 36000,
+
+      "discount": {
+        "normalDiscount": 15,
+        "additionalIndepenceDiscount": 10
+      }
+    }
+  ],
+  "users": [
+    {
+      "email": "poo112.naik@gmail.com",
+      "password": "Ved@123"
+    }
+  ]
+}

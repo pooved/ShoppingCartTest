@@ -1,1 +1,76 @@
-<p>products works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12"></div>
+  </div>
+  <div class="row py-5">
+    <div
+      class="col-12 col-md-6 col-lg-3 mb-4"
+      *ngFor="let product of productList"
+    >
+      <mat-card
+        class="example-card h-100 d-flex flex-column justify-content-end"
+      >
+        <img
+          mat-card-image
+          class="product-image"
+          [src]="product.image"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content class="py-2">
+          <p class="product-name">{{ product.name }}</p>
+          <div class="d-flex justify-content-between">
+            <p class="product-price mt-2">
+              <span
+                *ngIf="
+                  dateTime.setHours(0, 0, 0, 0) !==
+                  independenceDate.setHours(0, 0, 0, 0)
+                "
+                >{{
+                  product.cost | discount : product.discount.normalDiscount : 0
+                }}</span
+              >
+              <span
+                *ngIf="
+                  dateTime.setHours(0, 0, 0, 0) ===
+                  independenceDate.setHours(0, 0, 0, 0)
+                "
+                >{{
+                  product.cost
+                    | discount
+                      : product.discount.normalDiscount
+                      : product.discount.additionalIndepenceDiscount
+                }}</span
+              ><br />
+              <span
+                ><b>MRP:</b>:<s>{{ product.cost | currency : "INR" }}</s></span
+              >
+              <span *ngIf="+product.discount.normalDiscount != 0">
+                ({{ product.discount.normalDiscount }}%)</span
+              >
+
+              <span
+                *ngIf="
+                  dateTime.setHours(0, 0, 0, 0) ===
+                  independenceDate.setHours(0, 0, 0, 0)
+                "
+                ><span>+</span>({{
+                  product.discount.additionalIndepenceDiscount
+                }}% Independence Offer)</span
+              >
+            </p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            class="w-100"
+            mat-flat-button
+            color="primary"
+            (click)="onAddToCart(product)"
+          >
+            Add to Cart
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

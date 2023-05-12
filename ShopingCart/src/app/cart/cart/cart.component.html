@@ -1,1 +1,310 @@
-<p>cart works!</p>
+<div class="container">
+  <ng-container *ngIf="cartProducts.length == 0">
+    <mat-card class="card my-3">
+      <mat-card-header><h1>My Cart</h1></mat-card-header>
+
+      <mat-card-content class="center">
+        <h3>Your Cart is Empty</h3>
+        <h4>Add items to it</h4>
+        <button mat-flat-button color="accent" routerLink="/products">
+          Shop Now
+        </button>
+        <img src="" alt="" />
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+  <ng-container *ngIf="cartProducts.length != 0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-9">
+          <mat-card class="card my-3">
+            <mat-card-header class="d-flex justify-content-between">
+              <mat-card-title> <h4>My Cart</h4></mat-card-title>
+              <div class="GrandTotal d-flex justify-content-between gap-3">
+                <button mat-flat-button color="primary" (click)="onCartEmpty()">
+                  Empty Cart
+                </button>
+              </div>
+            </mat-card-header>
+            <mat-card-content class="table-responsive">
+              <table mat-table [dataSource]="dataSource" class="table">
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Name</th>
+                  <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+
+                <!-- Category Column -->
+                <ng-container matColumnDef="category">
+                  <th mat-header-cell *matHeaderCellDef>Category</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.category.name }}
+                  </td>
+                </ng-container>
+
+                <!-- Image Column -->
+                <ng-container matColumnDef="image">
+                  <th mat-header-cell *matHeaderCellDef>Image</th>
+                  <td mat-cell *matCellDef="let element">
+                    <img [src]="element.image" width="50" />
+                  </td>
+                </ng-container>
+                <!-- cost Column -->
+                <ng-container matColumnDef="cost">
+                  <th mat-header-cell *matHeaderCellDef>Cost</th>
+                  <td mat-cell *matCellDef="let element">
+                    <span
+                      *ngIf="
+                        dateTime.setHours(0, 0, 0, 0) !==
+                        independenceDate.setHours(0, 0, 0, 0)
+                      "
+                      >{{
+                        element.cost
+                          | discount : element.discount.normalDiscount : 0
+                      }}</span
+                    >
+                    <span
+                      *ngIf="
+                        dateTime.setHours(0, 0, 0, 0) ===
+                        independenceDate.setHours(0, 0, 0, 0)
+                      "
+                      >{{
+                        element.cost
+                          | discount
+                            : element.discount.normalDiscount
+                            : element.discount.additionalIndepenceDiscount
+                      }}</span
+                    >
+                    <span
+                      ><s>{{ element.cost | currency : "INR" }}</s></span
+                    >
+                  </td>
+                </ng-container>
+
+                <!-- Discount Column -->
+                <ng-container matColumnDef="discount">
+                  <th mat-header-cell *matHeaderCellDef>Discount</th>
+                  <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.discount.normalDiscount != 0"
+                      >{{ element.discount.normalDiscount }}%</span
+                    >
+                  </td>
+                </ng-container>
+
+                <!-- Quantity Column -->
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                  <td mat-cell *matCellDef="let element">
+                    <input
+                      type="number"
+                      [(ngModel)]="element.quantity"
+                      min="0"
+                      (ngModelChange)="onModelChanged(element)"
+                    />
+                  </td>
+                </ng-container>
+                <!-- Total Column -->
+                <ng-container matColumnDef="total">
+                  <th mat-header-cell *matHeaderCellDef>Total</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.total | currency : "INR" }}
+                  </td>
+                </ng-container>
+                <!-- edit -->
+                <!-- <ng-container matColumnDef="delete">
+                  <th mat-header-cell *matHeaderCellDef>Delete</th>
+                  <td mat-cell *matCellDef="let element">
+                    <mat-icon color="primary" (click)="onProductDelete(element)"
+                      ><span class="material-symbols-outlined"> delete </span></mat-icon
+                    >
+                  </td>
+                </ng-container> -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+              </table>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-12 col-md-12 col-lg-3">
+          <mat-card class="card my-3 price-details">
+            <mat-card-header class="border-bottom">
+              <h4>Price Details</h4>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-6 title">Price</div>
+                <div class="col-md-6 text-right value">
+                  {{ grandTotal | currency : "INR" }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 title">Discount</div>
+                <div class="col-md-6 value">
+                  -{{ discountAmount | currency : "INR" }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 title">Delivery Charges</div>
+                <div class="col-md-6 value">
+                  {{ deliveryCharges | currency : "INR" }}
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-footer>
+              <div class="row border-top py-2">
+                <div class="col-md-6 title"><strong>TOTAL</strong></div>
+                <div class="col-md-6 value">
+                  {{ finalTotal | currency : "INR" }}
+                </div>
+                <div class="col-md-12">
+                  <button
+                    mat-flat-button
+                    color="accent"
+                    class="w-100 mt-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Generate Bill
+                  </button>
+                </div>
+              </div>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <h4>Billing Details</h4>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 border-bottom mb-3 table-responsive">
+            <table mat-table [dataSource]="dataSource" class="table">
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Products</th>
+                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+              </ng-container>
+
+              <!-- Category Column -->
+              <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef>Category</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.category.name }}
+                </td>
+              </ng-container>
+
+              <!-- Image Column -->
+              <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef>Image</th>
+                <td mat-cell *matCellDef="let element">
+                  <img [src]="element.image" width="50" />
+                </td>
+              </ng-container>
+              <!-- cost Column -->
+              <ng-container matColumnDef="cost">
+                <th mat-header-cell *matHeaderCellDef>Cost</th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="me-2">{{
+                    element.cost
+                      | discount
+                        : element.discount.normalDiscount
+                        : element.discount.additionalIndepenceDiscount
+                  }}</span>
+                  <span
+                    ><s *ngIf="element.discount.normalDiscount != 0">{{
+                      element.cost | currency : "INR"
+                    }}</s></span
+                  >
+                </td>
+              </ng-container>
+
+              <!-- Discount Column -->
+              <ng-container matColumnDef="discount">
+                <th mat-header-cell *matHeaderCellDef>Discount</th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="element.discount.normalDiscount != 0"
+                    >{{ element.discount.normalDiscount }}%</span
+                  >
+                </td>
+              </ng-container>
+
+              <!-- Quantity Column -->
+              <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.quantity }}
+                </td>
+              </ng-container>
+              <!-- Total Column -->
+              <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.total | currency : "INR" }}
+                </td>
+              </ng-container>
+              <!-- edit -->
+              <!-- <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>Delete</th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-icon color="primary" (click)="onProductDelete(element)"
+                    ><span class="material-symbols-outlined"> delete </span></mat-icon
+                  >
+                </td>
+              </ng-container> -->
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsBills"></tr>
+              <tr
+                mat-row
+                *matRowDef="let row; columns: displayedColumnsBills"
+              ></tr>
+            </table>
+          </div>
+          <div class="d-flex justify-content-end w-100 px-4 gap-4">
+            <div><strong>Total Bill Amount:</strong> {{ finalTotal }}</div>
+            <div *ngIf="grandTotal >= 25000">
+              <strong>Discount Applied:</strong>
+              {{ discountAmount | currency : "INR" }}
+            </div>
+            <div *ngIf="deliveryCharges != 0">
+              <strong>Delivery Charges:</strong>
+              {{ deliveryCharges | currency : "INR" }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button mat-flat-button data-bs-dismiss="modal">Close</button>
+        <button mat-flat-button color="primary">Print</button>
+      </div>
+    </div>
+  </div>
+</div>

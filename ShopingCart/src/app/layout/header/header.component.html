@@ -1,7 +1,19 @@
-<mat-toolbar color="primary">
-  <div class="container">
-    <a href="#" mat-fab color="accent">
-      <mat-icon>home</mat-icon>
-    </a>
+<mat-toolbar color="primary" class="py-4">
+  <div class="container d-flex justify-content-between">
+    <a href="#" mat-fab color="accent"> Kart </a>
+    <div class="d-flex justify-content-between">
+      <button
+        routerLink="/cart"
+        mat-icon-button
+        class="example-icon favorite-icon"
+        aria-label="Example icon-button with heart icon"
+      >
+        <mat-icon matBadge="{{ totalItem }}" matBadgeColor="warn"
+          ><span class="material-symbols-outlined">
+            shopping_cart
+          </span></mat-icon
+        >
+      </button>
+    </div>
   </div>
 </mat-toolbar>
