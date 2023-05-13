@@ -9,5 +9,5 @@ export interface product {
   discount: discount;
   quantity: 'number';
   total: 'number';
-  date: 'date';
+  dates: 'date';
 }

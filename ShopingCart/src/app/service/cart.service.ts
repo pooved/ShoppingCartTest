@@ -28,6 +28,7 @@ export class CartService {
     if (!itemAllreadyExist) {
       this.cartItemList.push(product);
     }
+
     this.getTotalPerItem();
     this.getTotalPrice();
     this.productList.next(this.cartItemList);

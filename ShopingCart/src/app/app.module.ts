@@ -50,8 +50,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DiscountPipe } from './pipes/discount.pipe';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { DiscountPipe } from './pipes/discount.pipe';
     CartComponent,
     ProductsComponent,
     DiscountPipe,
+    DashboardComponent,
+    LoginComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,6 +109,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
     MatTableModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [DiscountPipe],
   bootstrap: [AppComponent],

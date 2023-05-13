@@ -79,17 +79,92 @@
       },
       "image": "https://m.media-amazon.com/images/I/51SzK2qldDL.jpg",
       "cost": 36000,
-
       "discount": {
         "normalDiscount": 15,
         "additionalIndepenceDiscount": 10
       }
     }
   ],
-  "users": [
+  "cart": [
     {
-      "email": "poo112.naik@gmail.com",
-      "password": "Ved@123"
+      "name": "Microwave",
+      "category": "Home Appliances",
+      "cost": 5000,
+      "quantity": 1,
+      "total": 4400,
+      "id": 1
+    },
+    {
+      "name": "Keyboard",
+      "category": "Computers",
+      "cost": 500,
+      "quantity": 1,
+      "total": 500,
+      "id": 2
+    },
+    {
+      "name": "SD Card",
+      "category": "Mobile",
+      "cost": 1200,
+      "quantity": 1,
+      "total": 1128,
+      "id": 3
+    },
+    {
+      "name": "Microwave",
+      "category": "Home Appliances",
+      "cost": 5000,
+      "quantity": 1,
+      "total": 4400,
+      "id": 4
+    },
+    {
+      "name": "Microwave",
+      "category": "Home Appliances",
+      "cost": 5000,
+      "quantity": 1,
+      "total": 4400,
+      "id": 5
+    },
+    {
+      "name": "Keyboard",
+      "category": "Computers",
+      "cost": 500,
+      "quantity": 1,
+      "total": 500,
+      "id": 6
+    },
+    {
+      "name": "Keyboard",
+      "category": "Computers",
+      "cost": 500,
+      "quantity": 1,
+      "total": 500,
+      "id": 7
+    },
+    {
+      "name": "Microwave",
+      "category": "Home Appliances",
+      "cost": 5000,
+      "quantity": 1,
+      "total": 4400,
+      "id": 8
+    },
+    {
+      "name": "Mixer Grinder",
+      "category": "Home Appliances",
+      "cost": 2000,
+      "quantity": 1,
+      "total": 1920,
+      "id": 9
+    },
+    {
+      "name": "SD Card",
+      "category": "Mobile",
+      "cost": 1200,
+      "quantity": 1,
+      "total": 1128,
+      "id": 10
     }
   ]
 }

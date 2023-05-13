@@ -1,8 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { product } from 'src/app/model/product.model';
 import { CartService } from 'src/app/service/cart.service';
+import { ServiceService } from 'src/app/service/service.service';
 
 @Component({
   selector: 'app-cart',
@@ -36,7 +37,11 @@ export class CartComponent implements OnInit {
   dataSource: MatTableDataSource<product> = new MatTableDataSource<product>();
   dateTime: Date = new Date();
   independenceDate: Date = new Date('08/15/2023');
-  constructor(public cartService: CartService) {}
+  baseUrl = '  http://localhost:3000';
+  constructor(
+    public cartService: CartService,
+    private serviceAPI: ServiceService
+  ) {}
   ngOnInit(): void {
     this.cartService.getProducts().subscribe({
       next: (successResponse) => {
@@ -47,6 +52,9 @@ export class CartComponent implements OnInit {
         this.grandTotal = this.cartService.getTotalPrice();
         this.deliveryCharges = this.cartService.deliveryCharges();
         this.finalTotal = this.cartService.getFinalTotal();
+        this.cartProducts.forEach((item) => {
+          Object.assign(item, { date: new Date() });
+        });
       },
       error: (errorResponse) => {
         console.log(errorResponse);
