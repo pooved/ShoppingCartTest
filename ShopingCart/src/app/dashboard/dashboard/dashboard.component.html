@@ -6,7 +6,96 @@
           <h4>Dashboard</h4>
         </mat-card-header>
         <mat-card-content>
-          <div>Under construction</div>
+          <div class="container-fluid">
+            <div class="row sparkboxes mt-4 mb-4">
+              <div class="col-md-4">
+                <div class="box box1">
+                  <div id="spark1" class="p-4">
+                    <h4>Total Quantity</h4>
+                    <strong style="font-size: 18px">{{ totalProducts }}</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box box2">
+                  <div id="spark2" class="p-4">
+                    <h4>Total Amount</h4>
+                    <strong style="font-size: 18px">{{
+                      totalPrice | currency : "INR"
+                    }}</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box box3">
+                  <div id="spark3" class="p-4">
+                    <h4>Total Products Ordered</h4>
+                    <strong style="font-size: 18px">{{
+                      totalOrderSale
+                    }}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-5 mb-4">
+              <div class="col-12 col-md-12 col-lg-6">
+                <div class="box">
+                  <div id="bar">
+                    <h4>Most Selling Product</h4>
+                    <div id="chart">
+                      <apx-chart
+                        [series]="chartOptions.series!"
+                        [chart]="chartOptions.chart!"
+                        [responsive]="chartOptions.responsive!"
+                        [labels]="chartOptions.labels!"
+                      ></apx-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-lg-6">
+                <div class="box">
+                  <h4>Most Selling Category</h4>
+                  <div id="catChart">
+                    <apx-chart
+                      [series]="CateChartOption.series!"
+                      [chart]="CateChartOption.chart!"
+                      [labels]="CateChartOption.labels"
+                      [title]="CateChartOption.title!"
+                      [theme]="CateChartOption.theme!"
+                      [fill]="CateChartOption.fill!"
+                      [yaxis]="CateChartOption.yaxis!"
+                      [stroke]="CateChartOption.stroke!"
+                      [legend]="CateChartOption.legend!"
+                      [plotOptions]="CateChartOption.plotOptions!"
+                    ></apx-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4 mb-4">
+              <div class="col-md-12">
+                <div class="box">
+                  <div id="chartBar">
+                    <apx-chart
+                      [series]="ChartBar.series!"
+                      [chart]="ChartBar.chart!"
+                      [dataLabels]="ChartBar.dataLabels!"
+                      [plotOptions]="ChartBar.plotOptions!"
+                      [yaxis]="ChartBar.yaxis!"
+                      [legend]="ChartBar.legend!"
+                      [fill]="ChartBar.fill!"
+                      [stroke]="ChartBar.stroke!"
+                      [tooltip]="ChartBar.tooltip!"
+                      [xaxis]="ChartBar.xaxis!"
+                    ></apx-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>

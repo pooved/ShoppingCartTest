@@ -55,6 +55,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ErrorComponent } from './error/error.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,8 @@ import { ErrorComponent } from './error/error.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgApexchartsModule,
+    NgApexchartsModule,
   ],
   providers: [DiscountPipe],
   bootstrap: [AppComponent],

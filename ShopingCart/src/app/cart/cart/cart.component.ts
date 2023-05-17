@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { cart } from 'src/app/model/cart.model';
 import { product } from 'src/app/model/product.model';
 import { CartService } from 'src/app/service/cart.service';
 import { ServiceService } from 'src/app/service/service.service';
@@ -12,6 +13,7 @@ import { ServiceService } from 'src/app/service/service.service';
 })
 export class CartComponent implements OnInit {
   cartProducts: product[] = [];
+
   displayedColumns: string[] = [
     'name',
     'category',
@@ -53,13 +55,22 @@ export class CartComponent implements OnInit {
         this.deliveryCharges = this.cartService.deliveryCharges();
         this.finalTotal = this.cartService.getFinalTotal();
         this.cartProducts.forEach((item) => {
-          Object.assign(item, { date: new Date() });
+          Object.assign(item, {
+            dates: new Date(),
+          });
+          this.serviceAPI.onCart(item).subscribe({
+            next: (successresponse) => {
+              console.log(`pp:${successresponse}`);
+            },
+          });
         });
       },
       error: (errorResponse) => {
         console.log(errorResponse);
       },
     });
+
+    console.log(`pp:${this.cartProducts}`);
   }
   onProductDelete(product: product) {
     this.cartService.removeCartItem(product);

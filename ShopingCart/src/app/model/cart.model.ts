@@ -4,5 +4,5 @@ export interface cart {
   cost: 'number';
   quantity: 'number';
   total: 'number';
-  dates: 'date';
+  dates: 'string';
 }
